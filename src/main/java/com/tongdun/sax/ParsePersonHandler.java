@@ -38,7 +38,9 @@ public class ParsePersonHandler extends DefaultHandler {
     // 解析到每个元素的内容时会调用此方法
     @Override
     public void characters(char[] ch, int start, int length) throws SAXException {
-        if ("Gender".equals(currTag)&& !Objects.isNull(person))person.gender = String.valueOf(ch,start,length);
+        if ("Gender".equals(currTag)&& !Objects.isNull(person)){
+            person.gender = String.valueOf(ch,start,length);
+        }
     }
 
     // 每个元素结束的时候都会调用该方法
