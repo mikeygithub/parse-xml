@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+        <context id="DB2Tables" defaultModelType="flat">
+            <commentGenerator>
+                <property name="suppressDate" value="true"/>
+                <property name="suppressAllComments" value="true"/>
+            </commentGenerator>
+            <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                            connectionURL="jdbc:mysql://localhost:3306/parse_xml"
+                            userId="root"
+                            password="123456">
+            </jdbcConnection>
+            <javaTypeResolver>
+                <property name="forceBigDecimals" value="true"/>
+            </javaTypeResolver>
+            <javaModelGenerator targetPackage="com.tongdun.parsexml.entity" targetProject="src/main/java/">
+                <property name="enableSubPackages" value="true"/>
+                <property name="trimStrings" value="true"/>
+            </javaModelGenerator>
+            <sqlMapGenerator targetPackage="mybatis.mapper" targetProject="src/main/resources/">
+                <property name="enableSubPackages" value="true"/>
+            </sqlMapGenerator>
+            <javaClientGenerator type="XMLMAPPER" targetPackage="com.tongdun.parsexml.mapper" targetProject="src/main/java/">
+                <property name="enableSubPackages" value="true"/>
+            </javaClientGenerator>
+            <!--        <table tableName="account" domainObjectName="Account">-->
+            <!--            <property name="useActualColumnNames" value="false"/>-->
+            <!--            <generatedKey column="" sqlStatement=""></generatedKey>-->
+            <!--            <columnOverride column="LONG_VARCHAR_FIELD" javaType="java.lang.String" jdbcType="VARCHAR"/>-->
+            <!--        </table>-->
+            <table tableName="Address" domainObjectName="Address"/>
+            <table tableName="Country" domainObjectName="Country"/>
+            <table tableName="Date" domainObjectName="Date"/>
+            <table tableName="DateValue" domainObjectName="DateValue"/>
+            <table tableName="Description" domainObjectName="Description"/>
+            <table tableName="ID" domainObjectName="ID"/>
+            <table tableName="Image" domainObjectName="Image"/>
+            <table tableName="Name" domainObjectName="Name"/>
+            <table tableName="NameValue" domainObjectName="NameValue"/>
+            <table tableName="OccTitle" domainObjectName="OccTitle"/>
+            <table tableName="Person" domainObjectName="Person"/>
+            <table tableName="Place" domainObjectName="Place"/>
+            <table tableName="Reference" domainObjectName="Reference"/>
+            <table tableName="Role" domainObjectName="Role"/>
+            <table tableName="Source" domainObjectName="Source"/>
+        </context>
+    </generatorConfiguration>
