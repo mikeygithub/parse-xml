@@ -2,7 +2,7 @@ package com.tongdun.parsexml.mapper;
 
 import static com.tongdun.parsexml.mapper.SourceDynamicSqlSupport.*;
 
-import com.tongdun.parsexml.entity.Source;
+import com.tongdun.parsexml.entity.person.Source;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;

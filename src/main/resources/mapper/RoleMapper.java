@@ -3,7 +3,7 @@ package com.tongdun.parsexml.mapper;
 import static com.tongdun.parsexml.mapper.RoleDynamicSqlSupport.*;
 import static org.mybatis.dynamic.sql.SqlBuilder.*;
 
-import com.tongdun.parsexml.entity.Role;
+import com.tongdun.parsexml.entity.person.Role;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;

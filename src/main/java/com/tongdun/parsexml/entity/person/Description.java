@@ -1,10 +1,15 @@
-package com.tongdun.parsexml.entity;
+package com.tongdun.parsexml.entity.person;
+
+import com.tongdun.parsexml.config.ConnectionManager;
 
 import javax.annotation.Generated;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.List;
 
 public class Description {
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public Long nameId;
+    public String personId;
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     public String description1;
@@ -16,13 +21,13 @@ public class Description {
     public String description3;
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public Long getNameId() {
-        return nameId;
+    public String getPersonId() {
+        return personId;
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public void setNameId(Long nameId) {
-        this.nameId = nameId;
+    public void setPersonId(String personId) {
+        this.personId = personId;
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
@@ -53,5 +58,32 @@ public class Description {
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     public void setDescription3(String description3) {
         this.description3 = description3 == null ? null : description3.trim();
+    }
+    public static void insert(List<Description> list)  {
+        String sql = "insert into Description values(?,?,?,?)";
+        PreparedStatement pstmt = null;
+        try {
+            pstmt = ConnectionManager.getConnection().prepareStatement(sql);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        for (Description widd : list) {
+            if (widd!=null)
+            try {
+                pstmt.setString(1, widd.personId);
+                pstmt.setString(2, widd.description1);
+                pstmt.setString(3, widd.description2);
+                pstmt.setString(4, widd.description3);
+                pstmt.addBatch();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            pstmt.executeBatch();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

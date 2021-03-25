@@ -1,10 +1,15 @@
-package com.tongdun.parsexml.entity;
+package com.tongdun.parsexml.entity.person;
+
+import com.tongdun.parsexml.config.ConnectionManager;
 
 import javax.annotation.Generated;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.List;
 
-public class OccTitle {
+public class Reference {
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public Long rolesId;
+    public String personId;
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     public String sinceday;
@@ -25,16 +30,16 @@ public class OccTitle {
     public String toyear;
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public String occcat;
+    public String value;
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public Long getRolesId() {
-        return rolesId;
+    public String getPersonId() {
+        return personId;
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public void setRolesId(Long rolesId) {
-        this.rolesId = rolesId;
+    public void setPersonId(String personId) {
+        this.personId = personId == null ? null : personId.trim();
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
@@ -98,12 +103,44 @@ public class OccTitle {
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public String getOcccat() {
-        return occcat;
+    public String getValue() {
+        return value;
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public void setOcccat(String occcat) {
-        this.occcat = occcat == null ? null : occcat.trim();
+    public void setValue(String value) {
+        this.value = value == null ? null : value.trim();
+    }
+
+    public static void insert(List<Reference> list) {
+        String sql = "insert into Reference values(?,?,?,?,?,?,?,?)";
+        PreparedStatement pstmt = null;
+        try {
+            pstmt = ConnectionManager.getConnection().prepareStatement(sql);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        for (Reference widd : list) {
+            if (widd!=null)
+            try {
+                pstmt.setString(1, widd.personId);
+                pstmt.setString(2, widd.sinceday);
+                pstmt.setString(3, widd.sincemonth);
+                pstmt.setString(4, widd.sinceyear);
+                pstmt.setString(5, widd.today);
+                pstmt.setString(6, widd.tomonth);
+                pstmt.setString(7, widd.toyear);
+                pstmt.setString(8, widd.value);
+                pstmt.addBatch();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            pstmt.executeBatch();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

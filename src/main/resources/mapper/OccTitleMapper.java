@@ -2,7 +2,7 @@ package com.tongdun.parsexml.mapper;
 
 import static com.tongdun.parsexml.mapper.OccTitleDynamicSqlSupport.*;
 
-import com.tongdun.parsexml.entity.OccTitle;
+import com.tongdun.parsexml.entity.person.OccTitle;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;

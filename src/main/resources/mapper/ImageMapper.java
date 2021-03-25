@@ -2,7 +2,7 @@ package com.tongdun.parsexml.mapper;
 
 import static com.tongdun.parsexml.mapper.ImageDynamicSqlSupport.*;
 
-import com.tongdun.parsexml.entity.Image;
+import com.tongdun.parsexml.entity.person.Image;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;

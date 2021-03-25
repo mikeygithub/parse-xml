@@ -1,4 +1,6 @@
-package com.tongdun.sax;
+package com.tongdun.parsexml.sax;
+
+import org.xml.sax.helpers.DefaultHandler;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -8,17 +10,15 @@ import javax.xml.parsers.SAXParserFactory;
  */
 public class SaxService {
 
-    public static void ReadXML(String uri, String NodeName) {
+    public static void ReadXML(String uri, String NodeName, DefaultHandler handler) {
         try {
             // 创建一个解析XML的工厂对象
             SAXParserFactory parserFactory = SAXParserFactory.newInstance();
             // 创建一个解析XML的对象
             SAXParser parser = parserFactory.newSAXParser();
             // 创建一个解析助手类
-//            ParseHandler parseHandler = new ParseHandler();
             ParsePersonHandler parsePersonHandler = new ParsePersonHandler();
-            parser.parse(uri,parsePersonHandler);
-//            parser.parse(uri, parseHandler);
+            parser.parse(uri,handler);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

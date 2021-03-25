@@ -1,0 +1,76 @@
+package com.tongdun.parsexml.entity.person;
+
+import javax.annotation.Generated;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import static com.tongdun.parsexml.config.ConnectionManager.getConnection;
+
+public class Role {
+    @Generated("org.mybatis.generator.api.MyBatisGenerator")
+    public Long id;
+
+    @Generated("org.mybatis.generator.api.MyBatisGenerator")
+    public String personId;
+
+    @Generated("org.mybatis.generator.api.MyBatisGenerator")
+    public String roletype;
+
+    @Generated("org.mybatis.generator.api.MyBatisGenerator")
+    public Long getId() {
+        return id;
+    }
+
+    @Generated("org.mybatis.generator.api.MyBatisGenerator")
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    @Generated("org.mybatis.generator.api.MyBatisGenerator")
+    public String getPersonId() {
+        return personId;
+    }
+
+    @Generated("org.mybatis.generator.api.MyBatisGenerator")
+    public void setPersonId(String personId) {
+        this.personId = personId == null ? null : personId.trim();
+    }
+
+    @Generated("org.mybatis.generator.api.MyBatisGenerator")
+    public String getRoletype() {
+        return roletype;
+    }
+
+    @Generated("org.mybatis.generator.api.MyBatisGenerator")
+    public void setRoletype(String roletype) {
+        this.roletype = roletype == null ? null : roletype.trim();
+    }
+
+    public static Long insertRetrunKey(Role role){
+        Connection conn = getConnection();
+        if (null != conn) {
+            String sql = "insert into Role(person_id,RoleType) values(?,?)";
+            // 指定返回生成的主键
+            try {
+
+                PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                // 如果使用静态的SQL，则不需要动态插入参数
+                pstmt.setString(1, role.personId);
+                pstmt.setString(2, role.roletype);
+                pstmt.executeUpdate();
+                // 检索由于执行此 Statement 对象而创建的所有自动生成的键
+                ResultSet rs = pstmt.getGeneratedKeys();
+                if (rs.next()) {
+                    role.id = rs.getLong(1);
+                    return role.id;
+                    //System.out.println("数据主键：" + id);
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        return role.id;
+    }
+}

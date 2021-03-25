@@ -1,6 +1,10 @@
-package com.tongdun.parsexml.entity;
+package com.tongdun.parsexml.entity.person;
+
+import com.tongdun.parsexml.config.ConnectionManager;
 
 import javax.annotation.Generated;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.List;
 
 public class Person {
@@ -33,9 +37,9 @@ public class Person {
     public List<Place> BirthPlace;
     public List<Reference> SanctionsReferences;
     public List<Address> Address;
-    public List<Country> CountryDetails;
+    public List<Country> CountryDetails;//到这里了
     public List<ID> IDNumberTypers;
-    public List<Source> SourceDescription;
+    public List<Source> SourceDescription;//
     public List<Image> Images;
 
 
@@ -107,5 +111,35 @@ public class Person {
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     public void setProfilenotes(String profilenotes) {
         this.profilenotes = profilenotes == null ? null : profilenotes.trim();
+    }
+
+    public static void  insert(List<Person> list) {
+        String sql = "insert into Person values(?,?,?,?,?,?,?)";
+        PreparedStatement pstmt = null;
+        try {
+            pstmt = ConnectionManager.getConnection().prepareStatement(sql);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        for (Person widd : list) {
+            try {
+                pstmt.setString(1, widd.id);
+                pstmt.setString(2, widd.action);
+                pstmt.setString(3, widd.date);
+                pstmt.setString(4, widd.gender);
+                pstmt.setString(5, widd.activestatus);
+                pstmt.setString(6, widd.deceased);
+                pstmt.setString(7, widd.profilenotes);
+                pstmt.addBatch();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            pstmt.executeBatch();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

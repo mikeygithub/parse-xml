@@ -1,13 +1,8 @@
-package com.tongdun.sax;
+package com.tongdun.parsexml.sax;
 
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
-
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.LinkedList;
-import java.util.List;
 
 
 public class ParseHandler extends DefaultHandler {

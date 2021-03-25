@@ -1,10 +1,15 @@
-package com.tongdun.parsexml.entity;
+package com.tongdun.parsexml.entity.person;
+
+import com.tongdun.parsexml.config.ConnectionManager;
 
 import javax.annotation.Generated;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.List;
 
-public class Reference {
+public class OccTitle {
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public String personId;
+    public Long rolesId;
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     public String sinceday;
@@ -25,16 +30,17 @@ public class Reference {
     public String toyear;
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
+    public String occcat;
     public String value;
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public String getPersonId() {
-        return personId;
+    public Long getRolesId() {
+        return rolesId;
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public void setPersonId(String personId) {
-        this.personId = personId == null ? null : personId.trim();
+    public void setRolesId(Long rolesId) {
+        this.rolesId = rolesId;
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
@@ -98,12 +104,44 @@ public class Reference {
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public String getValue() {
-        return value;
+    public String getOcccat() {
+        return occcat;
     }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public void setValue(String value) {
-        this.value = value == null ? null : value.trim();
+    public void setOcccat(String occcat) {
+        this.occcat = occcat == null ? null : occcat.trim();
+    }
+
+    public static void insert(List<OccTitle> list) {
+        String sql = "insert into OccTitle values(?,?,?,?,?,?,?,?,?)";
+        PreparedStatement pstmt = null;
+        try {
+            pstmt = ConnectionManager.getConnection().prepareStatement(sql);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        for (OccTitle widd : list) {
+            try {
+                pstmt.setInt(1, Math.toIntExact(widd.rolesId));
+                pstmt.setString(2, widd.sinceday);
+                pstmt.setString(3, widd.sincemonth);
+                pstmt.setString(4, widd.sinceyear);
+                pstmt.setString(5, widd.today);
+                pstmt.setString(6, widd.tomonth);
+                pstmt.setString(7, widd.toyear);
+                pstmt.setString(8, widd.occcat);
+                pstmt.setString(9, widd.value);
+                pstmt.addBatch();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            pstmt.executeBatch();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }
