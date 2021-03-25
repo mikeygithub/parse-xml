@@ -1,5 +1,6 @@
 package com.tongdun.parsexml.sax;
 
+import com.tongdun.parsexml.config.Constant;
 import com.tongdun.parsexml.entity.entity.Company;
 import com.tongdun.parsexml.entity.entity.Entity;
 import com.tongdun.parsexml.entity.entity.Vessel;
@@ -236,23 +237,22 @@ public class ParseEntityHandler extends DefaultHandler {
     // 每个元素结束的时候都会调用该方法
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
-        //每当结束一个标签解析将其加入List然后刷入数据库
-        //if ("RoleTypeList".equals(qName))start = true;//开始启动解析
         //Person总数：2658644
         if (this.start) {
             if ("Entity".equals(qName)) {
                 entityList.add(entity);
                 if (entityList.size() > 10) {
                     Entity.insert(entityList);
-                    System.out.println("插入1w条Entity");
+                    System.out.println("向数据库刷入数据:"+qName+Constant.FULL_FLASH_DB+"条:"+qName);
                     entityList.clear();
                 }
                 entity = null;
             }
             if ("NameValue".equals(qName)) {
                 nameValueList.add(nameValue);
-                if (nameValueList.size() > 10000) {
+                if (nameValueList.size() > Constant.FULL_FLASH_DB) {
                     NameValue.insert(nameValueList);
+                    System.out.println("向数据库刷入数据:"+qName+ Constant.FULL_FLASH_DB+"条:"+qName);
                     nameValueList.clear();
                 }
                 nameValue = null;
@@ -261,8 +261,9 @@ public class ParseEntityHandler extends DefaultHandler {
             //Description
             if ("Description".equals(qName)) {
                 descriptionList.add(description);
-                if (descriptionList.size() > 10000) {
+                if (descriptionList.size() > Constant.FULL_FLASH_DB) {
                     Description.insert(descriptionList);
+                    System.out.println("向数据库刷入数据:"+qName+Constant.FULL_FLASH_DB+"条:"+qName);
                     descriptionList.clear();
                 }
                 description = null;
@@ -270,8 +271,9 @@ public class ParseEntityHandler extends DefaultHandler {
             //DateValue
             if ("DateValue".equals(qName)) {
                 dateValues.add(dateValue);
-                if (dateValues.size() > 10000) {
+                if (dateValues.size() > Constant.FULL_FLASH_DB) {
                     DateValue.insert(dateValues);
+                    System.out.println("向数据库刷入数据:"+qName+Constant.FULL_FLASH_DB+"条:"+qName);
                     dateValues.clear();
                 }
                 dateValue = null;
@@ -279,15 +281,17 @@ public class ParseEntityHandler extends DefaultHandler {
             //Reference
             if ("Reference".equals(qName)) {
                 references.add(reference);
-                if (references.size() > 10000) {
+                if (references.size() > Constant.FULL_FLASH_DB) {
                     Reference.insert(references);
+                    System.out.println("向数据库刷入数据:"+qName+Constant.FULL_FLASH_DB+"条:"+qName);
                 }
                 reference = null;
             }
             if ("CompanyDetails".equals(qName)) {
                 companyList.add(company);
-                if (companyList.size() > 10000) {
+                if (companyList.size() > Constant.FULL_FLASH_DB) {
                     Company.insert(companyList);
+                    System.out.println("向数据库刷入数据:"+qName+Constant.FULL_FLASH_DB+"条:"+qName);
                     companyList.clear();
                 }
                 company = null;
@@ -296,8 +300,9 @@ public class ParseEntityHandler extends DefaultHandler {
             //Country
             if ("Country".equals(qName)) {
                 countryList.add(country);
-                if (countryList.size() > 10000) {
+                if (countryList.size() > Constant.FULL_FLASH_DB) {
                     Country.insert(countryList);
+                    System.out.println("向数据库刷入数据:"+qName+Constant.FULL_FLASH_DB+"条:"+qName);
                     countryList.clear();
                 }
                 country = null;
@@ -305,8 +310,9 @@ public class ParseEntityHandler extends DefaultHandler {
             //ID
             if ("ID".equals(qName)) {
                 idList.add(id);
-                if (idList.size() > 10000) {
+                if (idList.size() > Constant.FULL_FLASH_DB) {
                     ID.insert(idList);
+                    System.out.println("向数据库刷入数据:"+qName+Constant.FULL_FLASH_DB+"条:"+qName);
                     idList.clear();
                 }
                 id = null;
@@ -314,8 +320,9 @@ public class ParseEntityHandler extends DefaultHandler {
             //Source
             if ("Source".equals(qName)) {
                 sourceList.add(source);
-                if (sourceList.size() > 10000) {
+                if (sourceList.size() > Constant.FULL_FLASH_DB) {
                     Source.insert(sourceList);
+                    System.out.println("向数据库刷入数据:"+qName+Constant.FULL_FLASH_DB+"条:"+qName);
                     sourceList.clear();
                 }
                 source = null;
@@ -323,8 +330,9 @@ public class ParseEntityHandler extends DefaultHandler {
             //vessel
             if ("VesselDetails".equals(qName)) {
                 vesselList.add(vessel);
-                if (vesselList.size() > 10000) {
+                if (vesselList.size() > Constant.FULL_FLASH_DB) {
                     Vessel.insert(vesselList);
+                    System.out.println("向数据库刷入数据:"+qName+Constant.FULL_FLASH_DB+"条:"+qName);
                     vesselList.clear();
                 }
                 vessel = null;
@@ -338,7 +346,7 @@ public class ParseEntityHandler extends DefaultHandler {
     @Override
     public void endDocument() throws SAXException {
         super.endDocument();
-        //TODO:判断集合中是否还有值、有则刷入数据库
+        //判断集合中是否还有值、有则刷入数据库
         Entity.insert(entityList);
         NameValue.insert(nameValueList);
         Description.insert(descriptionList);
@@ -353,6 +361,6 @@ public class ParseEntityHandler extends DefaultHandler {
     }
 
     public static void main(String[] args) {
-        SaxService.ReadXML("/Users/mikey/Downloads/Factiva_PFA_Feed_XML/PFA2_202101072200_F.xml", "class",new ParseEntityHandler());
+        SaxService.ReadXML(Constant.PARSE_FILE_PATH, "class",new ParseEntityHandler());
     }
 }

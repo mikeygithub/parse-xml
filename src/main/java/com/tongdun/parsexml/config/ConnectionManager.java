@@ -14,7 +14,7 @@ public class ConnectionManager {
     public static final String url = "jdbc:mysql://127.0.0.1:3306/parse_xml?characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true";
     public static final String username = "root";
 //    public static final String username = "dongdun";
-    public static final String password = "goyb123456";
+    public static final String password = "123456";
 //    public static final String password = "tongdun@150713";
 
     /**

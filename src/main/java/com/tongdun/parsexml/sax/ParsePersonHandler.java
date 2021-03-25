@@ -1,5 +1,6 @@
 package com.tongdun.parsexml.sax;
 
+import com.tongdun.parsexml.config.Constant;
 import com.tongdun.parsexml.entity.person.*;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -11,9 +12,12 @@ import java.util.Objects;
 
 
 public class ParsePersonHandler extends DefaultHandler {
+    //personList
     List<Person> personList = new LinkedList<>();
     Person person = new Person();
+    //初步统计记录
     Integer count = 0;
+    //当前标签
     String currTag;
     boolean start = false;
     //person下的子标签
@@ -60,7 +64,9 @@ public class ParsePersonHandler extends DefaultHandler {
     }
     // 开始解析每个元素时都会调用该方法
     @Override
-    public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
+    public void startElement(String uri, String localName, String qName, Attributes attributes){
+        //如果当前标签为Person
+        if ("Person".equals(qName))this.start = true;
         if (this.start) {
             currTag = qName;
             if ("Person".equals(qName)) {
@@ -71,7 +77,6 @@ public class ParsePersonHandler extends DefaultHandler {
                 person.date = attributes.getValue("date");
             }
             if ("Name".equals(qName)) {
-                //需要设置id方便NameValue关联
                 name = new Name();
                 name.nametype = attributes.getValue("NameType");
                 name.personId = person.id;
@@ -125,10 +130,10 @@ public class ParsePersonHandler extends DefaultHandler {
                 dateValue.dnotes = attributes.getValue("DNotes");
             }
             ////////////////////BirthPlace
-            if ("BirthPlace".equals(qName)) {
+            if ("Place".equals(qName)) {
                 place = new Place();
                 place.personId = person.id;
-                place.name = attributes.getValue("Name");
+                place.name = attributes.getValue("name");
             }
             ////////////////SanctionsReferences
             if ("Reference".equals(qName)) {
@@ -182,6 +187,7 @@ public class ParsePersonHandler extends DefaultHandler {
     @Override
     public void characters(char[] ch, int start, int length) throws SAXException {
         if (this.start) {
+            //System.out.println(currTag+"="+String.valueOf(ch,start,length));
             //如果是Gender则赋值给当前person
             if ("Gender".equals(currTag) && !Objects.isNull(person)) {
                 person.gender = String.valueOf(ch, start, length);
@@ -252,20 +258,22 @@ public class ParsePersonHandler extends DefaultHandler {
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
         //每当结束一个标签解析将其加入List然后刷入数据库
-        if ("RoleTypeList".equals(qName))start = true;//开始启动解析
+        //if ("RoleTypeList".equals(qName))start = true;//开始启动解析
         //Person总数：2658644
         if ("Person".equals(qName)){
             personList.add(person);
-            if (personList.size()>10000) {
+            if (personList.size()> Constant.FULL_FLASH_DB) {
                 Person.insert(personList);
+                System.out.println("向数据库刷入数据:"+qName+Constant.FULL_FLASH_DB+"条:"+qName);
                 personList.clear();
             }
             person = null;
         }
         if ("NameValue".equals(qName)){
            nameValueList.add(nameValue);
-           if (nameValueList.size()>10000){
+           if (nameValueList.size()>Constant.FULL_FLASH_DB){
                NameValue.insert(nameValueList);
+               System.out.println("向数据库刷入数据:"+qName+Constant.FULL_FLASH_DB+"条:"+qName);
                nameValueList.clear();
            }
            nameValue = null;
@@ -273,8 +281,9 @@ public class ParsePersonHandler extends DefaultHandler {
         //Description
         if ("Description".equals(qName)){
             descriptionList.add(description);
-            if (descriptionList.size()>10000){
+            if (descriptionList.size()>Constant.FULL_FLASH_DB){
                 Description.insert(descriptionList);
+                System.out.println("向数据库刷入数据:"+qName+Constant.FULL_FLASH_DB+"条:"+qName);
                 descriptionList.clear();
             }
             description = null;
@@ -282,8 +291,9 @@ public class ParsePersonHandler extends DefaultHandler {
         //OccTitle
         if ("OccTitle".equals(qName)){
             occTitleList.add(occTitle);
-            if (occTitleList.size()>10000){
+            if (occTitleList.size()>Constant.FULL_FLASH_DB){
                 OccTitle.insert(occTitleList);
+                System.out.println("向数据库刷入数据:"+qName+Constant.FULL_FLASH_DB+"条:"+qName);
                 occTitleList.clear();
             }
             occTitle = null;
@@ -291,8 +301,9 @@ public class ParsePersonHandler extends DefaultHandler {
         //DateValue
         if ("DateValue".equals(qName)){
             dateValues.add(dateValue);
-            if (dateValues.size()>10000){
+            if (dateValues.size()>Constant.FULL_FLASH_DB){
                 DateValue.insert(dateValues);
+                System.out.println("向数据库刷入数据:"+qName+Constant.FULL_FLASH_DB+"条:"+qName);
                 dateValues.clear();
             }
             dateValue = null;
@@ -300,8 +311,9 @@ public class ParsePersonHandler extends DefaultHandler {
         //Place
         if ("Place".equals(qName)){
             places.add(place);
-            if (places.size()>10000){
+            if (places.size()>Constant.FULL_FLASH_DB){
                 Place.insert(places);
+                System.out.println("向数据库刷入数据:"+qName+Constant.FULL_FLASH_DB+"条:"+qName);
                 places.clear();
             }
             place = null;
@@ -309,15 +321,17 @@ public class ParsePersonHandler extends DefaultHandler {
         //Reference
         if ("Reference".equals(qName)){
             references.add(reference);
-            if (references.size()>10000){
+            if (references.size()>Constant.FULL_FLASH_DB){
                 Reference.insert(references);
+                System.out.println("向数据库刷入数据:"+qName+Constant.FULL_FLASH_DB+"条:"+qName);
             }
             reference = null;
         }
         if ("Address".equals(qName)){
             addresses.add(address);
-            if (addresses.size()>10000){
+            if (addresses.size()>Constant.FULL_FLASH_DB){
                 Address.insert(addresses);
+                System.out.println("向数据库刷入数据:"+qName+Constant.FULL_FLASH_DB+"条:"+qName);
                 addresses.clear();
             }
             address = null;
@@ -326,8 +340,9 @@ public class ParsePersonHandler extends DefaultHandler {
         //Country
         if("Country".equals(qName)){
             countryList.add(country);
-            if (countryList.size()>10000){
+            if (countryList.size()>Constant.FULL_FLASH_DB){
                 Country.insert(countryList);
+                System.out.println("向数据库刷入数据:"+qName+Constant.FULL_FLASH_DB+"条:"+qName);
                 countryList.clear();
             }
             country = null;
@@ -335,8 +350,9 @@ public class ParsePersonHandler extends DefaultHandler {
         //ID
         if ("ID".equals(qName)){
             idList.add(id);
-            if (idList.size()>10000){
+            if (idList.size()>Constant.FULL_FLASH_DB){
                 ID.insert(idList);
+                System.out.println("向数据库刷入数据:"+qName+Constant.FULL_FLASH_DB+"条:"+qName);
                 idList.clear();
             }
             id = null;
@@ -344,8 +360,9 @@ public class ParsePersonHandler extends DefaultHandler {
         //Source
         if ("Source".equals(qName)){
             sourceList.add(source);
-            if (sourceList.size()>10000){
+            if (sourceList.size()>Constant.FULL_FLASH_DB){
                 Source.insert(sourceList);
+                System.out.println("向数据库刷入数据:"+qName+Constant.FULL_FLASH_DB+"条:"+qName);
                 sourceList.clear();
             }
             image = null;
@@ -353,8 +370,9 @@ public class ParsePersonHandler extends DefaultHandler {
         //Image
         if ("Images".equals(qName)){
             imageList.add(image);
-            if (imageList.size()>10000){
+            if (imageList.size()>Constant.FULL_FLASH_DB){
                 Image.insert(imageList);
+                System.out.println("向数据库刷入数据:"+qName+Constant.FULL_FLASH_DB+"条:"+qName);
                 imageList.clear();
             }
             image = null;
@@ -369,7 +387,7 @@ public class ParsePersonHandler extends DefaultHandler {
     @Override
     public void endDocument() throws SAXException {
         super.endDocument();
-        //TODO:判断集合中是否还有值、有则刷入数据库
+        //判断集合中是否还有值、有则刷入数据库
         Person.insert(personList);
         NameValue.insert(nameValueList);
         Description.insert(descriptionList);
@@ -386,6 +404,6 @@ public class ParsePersonHandler extends DefaultHandler {
     }
 
     public static void main(String[] args) {
-        SaxService.ReadXML("/Users/mikey/Downloads/Factiva_PFA_Feed_XML/PFA2_202101072200_F.xml", "class",new ParsePersonHandler());
+        SaxService.ReadXML(Constant.PARSE_FILE_PATH, "class",new ParsePersonHandler());
     }
 }

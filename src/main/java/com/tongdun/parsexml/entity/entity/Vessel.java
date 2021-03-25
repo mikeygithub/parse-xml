@@ -30,6 +30,7 @@ public class Vessel {
         }
 
         for (Vessel widd : list) {
+            if (widd!=null)
             try {
                 pstmt.setString(1, widd.entityId);
                 pstmt.setString(2, widd.VesselCallSign);
