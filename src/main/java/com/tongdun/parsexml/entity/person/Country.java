@@ -11,7 +11,7 @@ public class Country {
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     public String countrytype;
 
-    public String personId;
+//    public String personId;
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     public String code;
@@ -50,7 +50,7 @@ public class Country {
             try {
                 pstmt.setString(1, widd.countrytype);
                 pstmt.setString(2, widd.code);
-                pstmt.setString(3, widd.personId);
+//                pstmt.setString(3, widd.personId);
                 pstmt.addBatch();
             } catch (SQLException e) {
                 e.printStackTrace();

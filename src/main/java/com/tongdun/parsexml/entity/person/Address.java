@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class Address {
-    public String personId;
+//    public String personId;
 
     public String addressline;
 
@@ -28,7 +28,7 @@ public class Address {
 
         for (Address widd : list) {
             try {
-                pstmt.setString(1, widd.personId);
+//                pstmt.setString(1, widd.personId);
                 pstmt.setString(2, widd.addressline);
                 pstmt.setString(3, widd.addresscity);
                 pstmt.setString(4, widd.addresscountry);

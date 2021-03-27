@@ -14,8 +14,8 @@ public class Name {
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     public Long id;
 
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public String personId;
+//    @Generated("org.mybatis.generator.api.MyBatisGenerator")
+//    public String personId;
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     public String nametype;
@@ -33,15 +33,15 @@ public class Name {
         this.id = id;
     }
 
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public String getPersonId() {
-        return personId;
-    }
-
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public void setPersonId(String personId) {
-        this.personId = personId == null ? null : personId.trim();
-    }
+//    @Generated("org.mybatis.generator.api.MyBatisGenerator")
+//    public String getPersonId() {
+//        return personId;
+//    }
+//
+//    @Generated("org.mybatis.generator.api.MyBatisGenerator")
+//    public void setPersonId(String personId) {
+//        this.personId = personId == null ? null : personId.trim();
+//    }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     public String getNametype() {
@@ -62,7 +62,7 @@ public class Name {
                 // 指定返回生成的主键
                 PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 // 如果使用静态的SQL，则不需要动态插入参数
-                pstmt.setString(1, name.personId);
+//                pstmt.setString(1, name.personId);
                 pstmt.setString(2, name.nametype);
                 pstmt.executeUpdate();
                 // 检索由于执行此 Statement 对象而创建的所有自动生成的键

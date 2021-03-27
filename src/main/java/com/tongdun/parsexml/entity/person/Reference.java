@@ -8,8 +8,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class Reference {
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public String personId;
+//    @Generated("org.mybatis.generator.api.MyBatisGenerator")
+//    public String personId;
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     public String sinceday;
@@ -32,15 +32,15 @@ public class Reference {
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     public String value;
 
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public String getPersonId() {
-        return personId;
-    }
-
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public void setPersonId(String personId) {
-        this.personId = personId == null ? null : personId.trim();
-    }
+//    @Generated("org.mybatis.generator.api.MyBatisGenerator")
+//    public String getPersonId() {
+//        return personId;
+//    }
+//
+//    @Generated("org.mybatis.generator.api.MyBatisGenerator")
+//    public void setPersonId(String personId) {
+//        this.personId = personId == null ? null : personId.trim();
+//    }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     public String getSinceday() {
@@ -124,7 +124,7 @@ public class Reference {
         for (Reference widd : list) {
             if (widd!=null)
             try {
-                pstmt.setString(1, widd.personId);
+//                pstmt.setString(1, widd.personId);
                 pstmt.setString(2, widd.sinceday);
                 pstmt.setString(3, widd.sincemonth);
                 pstmt.setString(4, widd.sinceyear);

@@ -8,8 +8,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class Description {
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public String personId;
+//    @Generated("org.mybatis.generator.api.MyBatisGenerator")
+//    public String personId;
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     public String description1;
@@ -20,15 +20,15 @@ public class Description {
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     public String description3;
 
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public String getPersonId() {
-        return personId;
-    }
-
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public void setPersonId(String personId) {
-        this.personId = personId;
-    }
+//    @Generated("org.mybatis.generator.api.MyBatisGenerator")
+//    public String getPersonId() {
+//        return personId;
+//    }
+//
+//    @Generated("org.mybatis.generator.api.MyBatisGenerator")
+//    public void setPersonId(String personId) {
+//        this.personId = personId;
+//    }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     public String getDescription1() {
@@ -71,7 +71,7 @@ public class Description {
         for (Description widd : list) {
             if (widd!=null)
             try {
-                pstmt.setString(1, widd.personId);
+//                pstmt.setString(1, widd.personId);
                 pstmt.setString(2, widd.description1);
                 pstmt.setString(3, widd.description2);
                 pstmt.setString(4, widd.description3);

@@ -30,18 +30,29 @@ public class Person {
     public String profilenotes;
 
     //内含标签列表
-    public List<Description> Descriptions;
-    public List<Name> NameDetails;
-    public List<Role> RoleDetails;
-    public List<Date> DateDetails;
-    public List<Place> BirthPlace;
-    public List<Reference> SanctionsReferences;
-    public List<Address> Address;
-    public List<Country> CountryDetails;//到这里了
-    public List<ID> IDNumberTypers;
-    public List<Source> SourceDescription;//
-    public List<Image> Images;
+//    public List<Description> Descriptions;
+//    public List<Name> NameDetails;
+//    public List<Role> RoleDetails;
+//    public List<Date> DateDetails;
+//    public List<Place> BirthPlace;
+//    public List<Reference> SanctionsReferences;
+//    public List<Address> Address;
+//    public List<Country> CountryDetails;//到这里了
+//    public List<ID> IDNumberTypers;
+//    public List<Source> SourceDescription;//
+//    public List<Image> Images;
 
+    public String Descriptions;
+    public String NameDetails;
+    public String RoleDetails;
+    public String DateDetails;
+    public String BirthPlace;
+    public String SanctionsReferences;
+    public String Address;
+    public String CountryDetails;
+    public String IDNumberTypers;
+    public String SourceDescription;
+    public String Images;
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     public String getId() {
@@ -131,6 +142,47 @@ public class Person {
                 pstmt.setString(5, widd.activestatus);
                 pstmt.setString(6, widd.deceased);
                 pstmt.setString(7, widd.profilenotes);
+                pstmt.addBatch();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        try {
+            pstmt.executeBatch();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void  insertToJSON(List<Person> list) {
+        String sql = "insert into Person_JSON values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        PreparedStatement pstmt = null;
+        try {
+            pstmt = ConnectionManager.getConnection().prepareStatement(sql);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        for (Person widd : list) {
+            try {
+                pstmt.setString(1, widd.id);
+                pstmt.setString(2, widd.action);
+                pstmt.setString(3, widd.date);
+                pstmt.setString(4, widd.gender);
+                pstmt.setString(5, widd.activestatus);
+                pstmt.setString(6, widd.deceased);
+                pstmt.setString(7, widd.profilenotes);
+                pstmt.setString(8, widd.Descriptions);
+                pstmt.setString(9, widd.NameDetails);
+                pstmt.setString(10, widd.RoleDetails);
+                pstmt.setString(11, widd.DateDetails);
+                pstmt.setString(12, widd.BirthPlace);
+                pstmt.setString(13, widd.SanctionsReferences);
+                pstmt.setString(14, widd.Address);
+                pstmt.setString(15, widd.CountryDetails);
+                pstmt.setString(16, widd.IDNumberTypers);
+                pstmt.setString(17, widd.SourceDescription);
+                pstmt.setString(18, widd.Images);
                 pstmt.addBatch();
             } catch (SQLException e) {
                 e.printStackTrace();

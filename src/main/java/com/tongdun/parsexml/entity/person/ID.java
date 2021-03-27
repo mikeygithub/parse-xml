@@ -8,8 +8,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class ID {
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public String personId;
+//    @Generated("org.mybatis.generator.api.MyBatisGenerator")
+//    public String personId;
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     public String idtype;
@@ -20,15 +20,15 @@ public class ID {
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     public String idnotes;
 
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public String getPersonId() {
-        return personId;
-    }
-
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public void setPersonId(String personId) {
-        this.personId = personId == null ? null : personId.trim();
-    }
+//    @Generated("org.mybatis.generator.api.MyBatisGenerator")
+//    public String getPersonId() {
+//        return personId;
+//    }
+//
+//    @Generated("org.mybatis.generator.api.MyBatisGenerator")
+//    public void setPersonId(String personId) {
+//        this.personId = personId == null ? null : personId.trim();
+//    }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     public String getIdtype() {
@@ -72,7 +72,7 @@ public class ID {
         for (ID widd : list) {
             if (widd!=null)
             try {
-                pstmt.setString(1, widd.personId);
+//                pstmt.setString(1, widd.personId);
                 pstmt.setString(2, widd.idtype);
                 pstmt.setString(3, widd.idvalue);
                 pstmt.setString(4, widd.idnotes);

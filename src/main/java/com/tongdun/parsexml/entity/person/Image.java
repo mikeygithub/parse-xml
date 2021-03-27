@@ -8,21 +8,21 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class Image {
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public String personId;
+//    @Generated("org.mybatis.generator.api.MyBatisGenerator")
+//    public String personId;
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     public String url;
 
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public String getPersonId() {
-        return personId;
-    }
-
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public void setPersonId(String personId) {
-        this.personId = personId == null ? null : personId.trim();
-    }
+//    @Generated("org.mybatis.generator.api.MyBatisGenerator")
+//    public String getPersonId() {
+//        return personId;
+//    }
+//
+//    @Generated("org.mybatis.generator.api.MyBatisGenerator")
+//    public void setPersonId(String personId) {
+//        this.personId = personId == null ? null : personId.trim();
+//    }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     public String getUrl() {
@@ -45,7 +45,7 @@ public class Image {
 
         for (Image widd : list) {
             try {
-                pstmt.setString(1, widd.personId);
+//                pstmt.setString(1, widd.personId);
                 pstmt.setString(2, widd.url);
                 pstmt.addBatch();
             } catch (SQLException e) {

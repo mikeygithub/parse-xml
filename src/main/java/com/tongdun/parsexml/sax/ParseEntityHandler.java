@@ -58,101 +58,101 @@ public class ParseEntityHandler extends DefaultHandler {
     // 开始解析每个元素时都会调用该方法
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-        if ("Entity".equals(qName)&&!this.start) {
-            System.out.println("开始解析Entity："+qName);
-        }
-        if ("Entity".equals(qName))this.start = true;
-        if (this.start) {
-            currTag = qName;
-            //System.out.println("当前解析标签："+qName);
-            if ("Entity".equals(qName)) {
-                entity = new Entity();
-                //设置person的属性
-                entity.id = attributes.getValue("id");
-                entity.action = attributes.getValue("action");
-                entity.date = attributes.getValue("date");
-            }
-            if ("Name".equals(qName)) {
-                //需要设置id方便NameValue关联
-                name = new Name();
-                name.nametype = attributes.getValue("NameType");
-                name.personId = entity.id;
-                //直接插入返回期自增id
-                name.id = Name.insertRetrunKey(name);
-            }
-            if ("NameValue".equals(qName)) {
-                nameValue = new NameValue();
-                nameValue.nameId = String.valueOf(name.id);
-            }
-            if ("Description".equals(qName)) {
-                description = new Description();
-                description.personId = entity.id;
-                description.description1 = attributes.getValue("Description1");
-                description.description2 = attributes.getValue("Description2");
-                description.description3 = attributes.getValue("Description3");
-            }
-            ////////////////////DateDetails
-            if ("Date".equals(qName)) {
-                date = new Date();
-                date.personId = entity.id;
-                date.datetype = attributes.getValue("DateType");
-                //直接插入返回期自增id
-                date.id = Date.insertRetrunKey(date);
-            }
-            if ("DateValue".equals(qName)) {
-                dateValue = new DateValue();
-                dateValue.dateId = date.id;
-                dateValue.day = attributes.getValue("Day");
-                dateValue.month = attributes.getValue("Month");
-                dateValue.year = attributes.getValue("Year");
-                dateValue.dnotes = attributes.getValue("Dnotes");
-            }
-            ////////////////SanctionsReferences
-            if ("Reference".equals(qName)) {
-                reference = new Reference();
-                reference.personId = entity.id;
-                ///属性
-                reference.sinceday = attributes.getValue("SinceDay");
-                reference.sincemonth = attributes.getValue("SinceMonth");
-                reference.sinceyear = attributes.getValue("SinceYear");
-                reference.today = attributes.getValue("ToDay");
-                reference.tomonth = attributes.getValue("ToMonth");
-                reference.toyear = attributes.getValue("ToYear");
-            }
-            //Vessel
-            if("VesselDetails".equals(qName)){
-                vessel = new Vessel();
-                vessel.entityId = entity.id;
-            }
-            ///CompanyDetails
-            if ("CompanyDetails".equals(qName)) {
-                company = new Company();
-                company.entityId = entity.id;
-            }
-            //CountryDetails
-            if ("Country".equals(qName)) {
-                country = new Country();
-                country.personId = entity.id;
-                country.countrytype = attributes.getValue("CountryType");
-            }
-            if ("CountryValue".equals(qName)) {
-                country.code = attributes.getValue("Code");
-            }
-            //////////////IDNumberTypes
-            if ("ID".equals(qName)) {
-                id = new ID();
-                id.personId = entity.id;
-                id.idtype = attributes.getValue("IDType");
-            }
-            if ("IDValue".equals(qName)) {
-                id.idnotes = attributes.getValue("IDnotes");
-            }
-            if ("Source".equals(qName)) {
-                source = new Source();
-                source.personId = entity.id;
-                source.name = attributes.getValue("name");
-            }
-        }
+//        if ("Entity".equals(qName)&&!this.start) {
+//            System.out.println("开始解析Entity："+qName);
+//        }
+//        if ("Entity".equals(qName))this.start = true;
+//        if (this.start) {
+//            currTag = qName;
+//            //System.out.println("当前解析标签："+qName);
+//            if ("Entity".equals(qName)) {
+//                entity = new Entity();
+//                //设置person的属性
+//                entity.id = attributes.getValue("id");
+//                entity.action = attributes.getValue("action");
+//                entity.date = attributes.getValue("date");
+//            }
+//            if ("Name".equals(qName)) {
+//                //需要设置id方便NameValue关联
+//                name = new Name();
+//                name.nametype = attributes.getValue("NameType");
+//                name.personId = entity.id;
+//                //直接插入返回期自增id
+//                name.id = Name.insertRetrunKey(name);
+//            }
+//            if ("NameValue".equals(qName)) {
+//                nameValue = new NameValue();
+//                nameValue.nameId = String.valueOf(name.id);
+//            }
+//            if ("Description".equals(qName)) {
+//                description = new Description();
+//                description.personId = entity.id;
+//                description.description1 = attributes.getValue("Description1");
+//                description.description2 = attributes.getValue("Description2");
+//                description.description3 = attributes.getValue("Description3");
+//            }
+//            ////////////////////DateDetails
+//            if ("Date".equals(qName)) {
+//                date = new Date();
+//                date.personId = entity.id;
+//                date.datetype = attributes.getValue("DateType");
+//                //直接插入返回期自增id
+//                date.id = Date.insertRetrunKey(date);
+//            }
+//            if ("DateValue".equals(qName)) {
+//                dateValue = new DateValue();
+//                dateValue.dateId = date.id;
+//                dateValue.day = attributes.getValue("Day");
+//                dateValue.month = attributes.getValue("Month");
+//                dateValue.year = attributes.getValue("Year");
+//                dateValue.dnotes = attributes.getValue("Dnotes");
+//            }
+//            ////////////////SanctionsReferences
+//            if ("Reference".equals(qName)) {
+//                reference = new Reference();
+//                reference.personId = entity.id;
+//                ///属性
+//                reference.sinceday = attributes.getValue("SinceDay");
+//                reference.sincemonth = attributes.getValue("SinceMonth");
+//                reference.sinceyear = attributes.getValue("SinceYear");
+//                reference.today = attributes.getValue("ToDay");
+//                reference.tomonth = attributes.getValue("ToMonth");
+//                reference.toyear = attributes.getValue("ToYear");
+//            }
+//            //Vessel
+//            if("VesselDetails".equals(qName)){
+//                vessel = new Vessel();
+//                vessel.entityId = entity.id;
+//            }
+//            ///CompanyDetails
+//            if ("CompanyDetails".equals(qName)) {
+//                company = new Company();
+//                company.entityId = entity.id;
+//            }
+//            //CountryDetails
+//            if ("Country".equals(qName)) {
+//                country = new Country();
+//                country.personId = entity.id;
+//                country.countrytype = attributes.getValue("CountryType");
+//            }
+//            if ("CountryValue".equals(qName)) {
+//                country.code = attributes.getValue("Code");
+//            }
+//            //////////////IDNumberTypes
+//            if ("ID".equals(qName)) {
+//                id = new ID();
+//                id.personId = entity.id;
+//                id.idtype = attributes.getValue("IDType");
+//            }
+//            if ("IDValue".equals(qName)) {
+//                id.idnotes = attributes.getValue("IDnotes");
+//            }
+//            if ("Source".equals(qName)) {
+//                source = new Source();
+//                source.personId = entity.id;
+//                source.name = attributes.getValue("name");
+//            }
+//        }
     }
 
     // 解析到每个元素的内容时会调用此方法
@@ -283,6 +283,7 @@ public class ParseEntityHandler extends DefaultHandler {
                 references.add(reference);
                 if (references.size() > Constant.FULL_FLASH_DB) {
                     Reference.insert(references);
+                    references.clear();
                     System.out.println("向数据库刷入数据:"+qName+Constant.FULL_FLASH_DB+"条:"+qName);
                 }
                 reference = null;
@@ -361,6 +362,10 @@ public class ParseEntityHandler extends DefaultHandler {
     }
 
     public static void main(String[] args) {
+
+        Long startTime = System.currentTimeMillis();
         SaxService.ReadXML(Constant.PARSE_FILE_PATH, "class",new ParseEntityHandler());
+        System.out.printf("解析耗时:");
+        System.out.println(((System.currentTimeMillis()-startTime) / 1000)+"秒");
     }
 }

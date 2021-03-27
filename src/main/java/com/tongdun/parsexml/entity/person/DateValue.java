@@ -8,8 +8,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class DateValue {
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public Long dateId;
+//    @Generated("org.mybatis.generator.api.MyBatisGenerator")
+//    public Long dateId;
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     public String day;
@@ -23,15 +23,15 @@ public class DateValue {
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     public String dnotes;
 
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public Long getDateId() {
-        return dateId;
-    }
+//    @Generated("org.mybatis.generator.api.MyBatisGenerator")
+//    public Long getDateId() {
+//        return dateId;
+//    }
 
-    @Generated("org.mybatis.generator.api.MyBatisGenerator")
-    public void setDateId(Long dateId) {
-        this.dateId = dateId;
-    }
+//    @Generated("org.mybatis.generator.api.MyBatisGenerator")
+//    public void setDateId(Long dateId) {
+//        this.dateId = dateId;
+//    }
 
     @Generated("org.mybatis.generator.api.MyBatisGenerator")
     public String getDay() {
@@ -86,7 +86,7 @@ public class DateValue {
         for (DateValue widd : list) {
             if (widd!=null)
             try {
-                pstmt.setInt(1, Math.toIntExact(widd.dateId));
+//                pstmt.setInt(1, Math.toIntExact(widd.dateId));
                 pstmt.setString(2, widd.day);
                 pstmt.setString(3, widd.month);
                 pstmt.setString(4, widd.year);

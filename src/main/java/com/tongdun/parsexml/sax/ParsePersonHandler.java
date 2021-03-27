@@ -67,119 +67,121 @@ public class ParsePersonHandler extends DefaultHandler {
     public void startElement(String uri, String localName, String qName, Attributes attributes){
         //如果当前标签为Person
         if ("Person".equals(qName))this.start = true;
+//        if ("Person".equals(qName))this.count++;
+//        if (count==1001000) System.out.println(qName);
         if (this.start) {
             currTag = qName;
-            if ("Person".equals(qName)) {
-                person = new Person();
-                //设置person的属性
-                person.id = attributes.getValue("id");
-                person.action = attributes.getValue("action");
-                person.date = attributes.getValue("date");
-            }
-            if ("Name".equals(qName)) {
-                name = new Name();
-                name.nametype = attributes.getValue("NameType");
-                name.personId = person.id;
-                //直接插入返回期自增id
-                name.id = Name.insertRetrunKey(name);
-            }
-            if ("NameValue".equals(qName)) {
-                nameValue = new NameValue();
-                nameValue.nameId = String.valueOf(name.id);
-            }
-            if ("Description".equals(qName)) {
-                description = new Description();
-                description.personId = person.id;
-                description.description1 = attributes.getValue("Description1");
-                description.description2 = attributes.getValue("Description2");
-                description.description3 = attributes.getValue("Description3");
-            }
-            /////////////////////////////////////////////Roles列表///////////////////////////////////////////////
-            if ("Roles".equals(qName)) {
-                role = new Role();
-                role.personId = person.id;
-                role.roletype = attributes.getValue("RoleType");
-                //直接插入返回期自增id
-                role.id = Role.insertRetrunKey(this.role);
-            }
-            if ("OccTitle".equals(qName)) {
-                occTitle = new OccTitle();
-                occTitle.rolesId = role.id;
-                occTitle.occcat = attributes.getValue("OccCat");
-                occTitle.toyear = attributes.getValue("ToYear");
-                occTitle.tomonth = attributes.getValue("ToMonth");
-                occTitle.today = attributes.getValue("ToDay");
-                occTitle.sinceyear = attributes.getValue("SinceYear");
-                occTitle.sincemonth = attributes.getValue("SinceMonth");
-                occTitle.sinceday = attributes.getValue("SinceDay");
-            }
-            ////////////////////DateDetails
-            if ("Date".equals(qName)) {
-                date = new Date();
-                date.personId = person.id;
-                date.datetype = attributes.getValue("DateType");
-                //直接插入返回期自增id
-                date.id = Date.insertRetrunKey(date);
-            }
-            if ("DateValue".equals(qName)) {
-                dateValue = new DateValue();
-                dateValue.dateId = date.id;
-                dateValue.day = attributes.getValue("Day");
-                dateValue.month = attributes.getValue("Month");
-                dateValue.year = attributes.getValue("Year");
-                dateValue.dnotes = attributes.getValue("DNotes");
-            }
-            ////////////////////BirthPlace
-            if ("Place".equals(qName)) {
-                place = new Place();
-                place.personId = person.id;
-                place.name = attributes.getValue("name");
-            }
-            ////////////////SanctionsReferences
-            if ("Reference".equals(qName)) {
-                reference = new Reference();
-                reference.personId = person.id;
-                ///属性
-                reference.sinceday = attributes.getValue("SinceDay");
-                reference.sincemonth = attributes.getValue("SinceMonth");
-                reference.sinceyear = attributes.getValue("SinceYear");
-                reference.today = attributes.getValue("ToDay");
-                reference.tomonth = attributes.getValue("ToMonth");
-                reference.toyear = attributes.getValue("ToYear");
-            }
-            ///address
-            if ("Address".equals(qName)) {
-                address = new Address();
-                address.personId = person.id;
-            }
-            //CountryDetails
-            if ("Country".equals(qName)) {
-                country = new Country();
-                country.personId = person.id;
-                country.countrytype = attributes.getValue("CountryType");
-            }
-            if ("CountryValue".equals(qName)) {
-                country.code = attributes.getValue("Code");
-            }
-            //////////////IDNumberTypes
-            if ("ID".equals(qName)) {
-                id = new ID();
-                id.personId = person.id;
-                id.idtype = attributes.getValue("IDType");
-            }
-            if ("IDValue".equals(qName)) {
-                id.idnotes = attributes.getValue("IDnotes");
-            }
-            if ("Source".equals(qName)) {
-                source = new Source();
-                source.personId = person.id;
-                source.name = attributes.getValue("name");
-            }
-            if ("Image".equals(qName)) {
-                image = new Image();
-                image.personId = person.id;
-                image.url = attributes.getValue("URL");
-            }
+//            if ("Person".equals(qName)) {
+//                person = new Person();
+//                //设置person的属性
+//                person.id = attributes.getValue("id");
+//                person.action = attributes.getValue("action");
+//                person.date = attributes.getValue("date");
+//            }
+//            if ("Name".equals(qName)) {
+//                name = new Name();
+//                name.nametype = attributes.getValue("NameType");
+//                name.personId = person.id;
+//                //直接插入返回期自增id
+//                name.id = Name.insertRetrunKey(name);
+//            }
+//            if ("NameValue".equals(qName)) {
+//                nameValue = new NameValue();
+//                nameValue.nameId = String.valueOf(name.id);
+//            }
+//            if ("Description".equals(qName)) {
+//                description = new Description();
+//                description.personId = person.id;
+//                description.description1 = attributes.getValue("Description1");
+//                description.description2 = attributes.getValue("Description2");
+//                description.description3 = attributes.getValue("Description3");
+//            }
+//            /////////////////////////////////////////////Roles列表///////////////////////////////////////////////
+//            if ("Roles".equals(qName)) {
+//                role = new Role();
+//                role.personId = person.id;
+//                role.roletype = attributes.getValue("RoleType");
+//                //直接插入返回期自增id
+//                role.id = Role.insertRetrunKey(this.role);
+//            }
+//            if ("OccTitle".equals(qName)) {
+//                occTitle = new OccTitle();
+//                occTitle.rolesId = role.id;
+//                occTitle.occcat = attributes.getValue("OccCat");
+//                occTitle.toyear = attributes.getValue("ToYear");
+//                occTitle.tomonth = attributes.getValue("ToMonth");
+//                occTitle.today = attributes.getValue("ToDay");
+//                occTitle.sinceyear = attributes.getValue("SinceYear");
+//                occTitle.sincemonth = attributes.getValue("SinceMonth");
+//                occTitle.sinceday = attributes.getValue("SinceDay");
+//            }
+//            ////////////////////DateDetails
+//            if ("Date".equals(qName)) {
+//                date = new Date();
+//                date.personId = person.id;
+//                date.datetype = attributes.getValue("DateType");
+//                //直接插入返回期自增id
+//                date.id = Date.insertRetrunKey(date);
+//            }
+//            if ("DateValue".equals(qName)) {
+//                dateValue = new DateValue();
+//                dateValue.dateId = date.id;
+//                dateValue.day = attributes.getValue("Day");
+//                dateValue.month = attributes.getValue("Month");
+//                dateValue.year = attributes.getValue("Year");
+//                dateValue.dnotes = attributes.getValue("DNotes");
+//            }
+//            ////////////////////BirthPlace
+//            if ("Place".equals(qName)) {
+//                place = new Place();
+//                place.personId = person.id;
+//                place.name = attributes.getValue("name");
+//            }
+//            ////////////////SanctionsReferences
+//            if ("Reference".equals(qName)) {
+//                reference = new Reference();
+//                reference.personId = person.id;
+//                ///属性
+//                reference.sinceday = attributes.getValue("SinceDay");
+//                reference.sincemonth = attributes.getValue("SinceMonth");
+//                reference.sinceyear = attributes.getValue("SinceYear");
+//                reference.today = attributes.getValue("ToDay");
+//                reference.tomonth = attributes.getValue("ToMonth");
+//                reference.toyear = attributes.getValue("ToYear");
+//            }
+//            ///address
+//            if ("Address".equals(qName)) {
+//                address = new Address();
+//                address.personId = person.id;
+//            }
+//            //CountryDetails
+//            if ("Country".equals(qName)) {
+//                country = new Country();
+//                country.personId = person.id;
+//                country.countrytype = attributes.getValue("CountryType");
+//            }
+//            if ("CountryValue".equals(qName)) {
+//                country.code = attributes.getValue("Code");
+//            }
+//            //////////////IDNumberTypes
+//            if ("ID".equals(qName)) {
+//                id = new ID();
+//                id.personId = person.id;
+//                id.idtype = attributes.getValue("IDType");
+//            }
+//            if ("IDValue".equals(qName)) {
+//                id.idnotes = attributes.getValue("IDnotes");
+//            }
+//            if ("Source".equals(qName)) {
+//                source = new Source();
+//                source.personId = person.id;
+//                source.name = attributes.getValue("name");
+//            }
+//            if ("Image".equals(qName)) {
+//                image = new Image();
+//                image.personId = person.id;
+//                image.url = attributes.getValue("URL");
+//            }
         }
     }
 
@@ -260,8 +262,13 @@ public class ParsePersonHandler extends DefaultHandler {
         //每当结束一个标签解析将其加入List然后刷入数据库
         //if ("RoleTypeList".equals(qName))start = true;//开始启动解析
         //Person总数：2658644
+        //if ("Person".equals(qName)){
+        //    System.exit(0);
+        //}
         if ("Person".equals(qName)){
             personList.add(person);
+            //TODO:直接进行JSON序列化存入字段
+            //清空列表
             if (personList.size()> Constant.FULL_FLASH_DB) {
                 Person.insert(personList);
                 System.out.println("向数据库刷入数据:"+qName+Constant.FULL_FLASH_DB+"条:"+qName);
@@ -323,6 +330,7 @@ public class ParsePersonHandler extends DefaultHandler {
             references.add(reference);
             if (references.size()>Constant.FULL_FLASH_DB){
                 Reference.insert(references);
+                references.clear();
                 System.out.println("向数据库刷入数据:"+qName+Constant.FULL_FLASH_DB+"条:"+qName);
             }
             reference = null;
@@ -404,6 +412,9 @@ public class ParsePersonHandler extends DefaultHandler {
     }
 
     public static void main(String[] args) {
+        Long startTime = System.currentTimeMillis();
         SaxService.ReadXML(Constant.PARSE_FILE_PATH, "class",new ParsePersonHandler());
+        System.out.printf("解析耗时:");
+        System.out.println(((System.currentTimeMillis()-startTime) / 1000)+"秒");
     }
 }
