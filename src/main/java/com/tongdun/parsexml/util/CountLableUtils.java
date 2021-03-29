@@ -30,9 +30,7 @@ public class CountLableUtils extends DefaultHandler {
     public static void main(String[] args) throws InterruptedException {
 //        countLable("Person");//2658644
 //        countLable("Entity");//182219
-
-        Long startTime = System.currentTimeMillis();
-        Thread.sleep(6000);
-        System.out.println(((System.currentTimeMillis()-startTime) / 1000)+"秒");
+//        countLable("PublicFigure");//1469520
+//        countLable("SpecialEntity");//48652
     }
 }

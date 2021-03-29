@@ -67,7 +67,7 @@ public class Entity {
     }
 
     public static void  insertToJSON(List<Entity> list) {
-        String sql = "insert into Entity_JSON values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into entity_json values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement pstmt = null;
         try {
             pstmt = ConnectionManager.getConnection().prepareStatement(sql);

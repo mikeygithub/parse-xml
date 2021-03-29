@@ -59,4 +59,21 @@ create table Person_JSON
     SourceDescription   mediumtext null,
     Images              mediumtext null
 ) charset = utf8mb4;
+
+-- auto-generated definition
+create table publicfigure
+(
+    id        char(255) null,
+    Associate longtext  null
+)
+    charset = utf8mb4;
+
+-- auto-generated definition
+create table specialentity
+(
+    id        char(255) null,
+    Associate longtext  null
+)
+    charset = utf8mb4;
+
 ```

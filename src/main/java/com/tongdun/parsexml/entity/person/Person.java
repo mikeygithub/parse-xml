@@ -155,7 +155,7 @@ public class Person {
     }
 
     public static void  insertToJSON(List<Person> list) {
-        String sql = "insert into Person_JSON values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "insert into person_json values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
         PreparedStatement pstmt = null;
         try {
             pstmt = ConnectionManager.getConnection().prepareStatement(sql);
